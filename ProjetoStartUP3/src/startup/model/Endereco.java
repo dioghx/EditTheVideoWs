@@ -18,6 +18,7 @@ public class Endereco
 	private String rua;
 	private int numero;
 	
+	//Determinar se necessita de anotação para sequência,ja que estaremos utilizando MySQL.
 	@Id()
 	@SequenceGenerator(name = "END_SEQ", sequenceName = "ENDERECO_SEQ", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "END_SEQ")

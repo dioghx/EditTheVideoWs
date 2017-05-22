@@ -3,11 +3,14 @@ package startup.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity(name = "USUARIO")
@@ -20,22 +23,30 @@ public class Usuario implements Serializable, Cloneable
     private String    email;
     private Date 	  nascimento;
     private String	  telefone;
-    private String	  login;
     private String	  senha;
+    private Endereco endereco;
 
-    @Id()
+	@Id()
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USUARIO_SEQ")
     @SequenceGenerator(name = "USUARIO_SEQ", sequenceName = "USUARIO_SEQ", allocationSize = 1)
     @Column(name = "id")
-    public int getMatricula()
-    {
-        return id;
-    }
+	   public int getId() {
+			return id;
+		}
 
-    public void setMatricula(int pId)
-    {
-        id = pId;
-    }
+		public void setId(int id) {
+			this.id = id;
+		}
+		
+		@OneToOne(cascade = {CascadeType.ALL})
+		@JoinColumn(name="ID_ENDERECO", referencedColumnName = "ID")
+		public Endereco getEndereco() {
+			return endereco;
+		}
+
+		public void setEndereco(Endereco endereco) {
+			this.endereco = endereco;
+		}
 
     @Column(name = "NOME")
     public String getNome()
@@ -81,17 +92,7 @@ public class Usuario implements Serializable, Cloneable
         telefone = pTelefone;
     }
 
-    @Column(name = "LOGIN")
-    public String getLogin()
-    {
-        return login;
-    }
-
-    public void setLogin(String pLogin)
-    {
-        login = pLogin;
-    }
-
+  
     @Column(name = "SENHA")
     public String getSenha()
     {

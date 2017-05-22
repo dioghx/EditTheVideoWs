@@ -30,6 +30,7 @@ public class Video {
 	private List<Genero>generos;
 	private String link;
 	
+	//Determinar se necessita de anotação para sequência,ja que estaremos utilizando MySQL.
 	@Id()
 	@SequenceGenerator(name = "VID_SEQ", sequenceName = "VIDEO_SEQ", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VID_SEQ")

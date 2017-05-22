@@ -1,7 +1,5 @@
 package startup.model;
 
-import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,15 +15,13 @@ public class Profissional
 {
     
     private int       id;
-    private String    nome;
-    private String    email;
     private long      cpf;
-    private Date 	  nascimento;
-    private String	  telefone;
-    private String	  login;
-    private String	  senha;
-    private Endereco  endereco;
+    private String    nivel;
+    private String 	  descricao;
+    private long      avaliacao;  
+    private Usuario   usuario;
 
+  //Determinar se necessita de anotação para sequência,ja que estaremos utilizando MySQL.
     @Id()
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROFISSIONAL_SEQ")
     @SequenceGenerator(name = "PROFISSIONAL_SEQ", sequenceName = "PROFISSIONAL_SEQ", allocationSize = 1)
@@ -34,98 +30,51 @@ public class Profissional
     {
         return id;
     }
-    
-    @OneToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name="ID_ENDERECO", referencedColumnName = "ID")
-    public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
 	public void setId(int pId)
     {
         id = pId;
     }
+	
+	@Column(name ="CPF")
+    public long getCpf() {
+		return cpf;
+	}
 
-    @Column(name = "NOME")
-    public String getNome()
-    {
-        return nome;
-    }
+	public void setCpf(long cpf) {
+		this.cpf = cpf;
+	}
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name="ID_USUARIO", referencedColumnName = "ID")
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
-    public void setNome(String pNome)
-    {
-        nome = pNome;
-    }
-
-    @Column(name = "EMAIL")
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String pEmail)
-    {
-        email = pEmail;
-    }
-
-    @Column(name = "CPF")
-    public long getCpf()
-    {
-        return cpf;
-    }
-
-    public void setCpf(long pCpf)
-    {
-        cpf = pCpf;
-    }
-
-    @Column(name = "NASCIMENTO")
-    public Date getNascimento()
-    {
-        return nascimento;
-    }
-
-    public void setNascimento(Date pNascimento)
-    {
-        nascimento = pNascimento;
-    }
-
-    @Column(name = "TELEFONE")
-    public String getTelefone()
-    {
-        return telefone;
-    }
-
-    public void setTelefone(String pTelefone)
-    {
-        telefone = pTelefone;
-    }
-
-    @Column(name = "LOGIN")
-    public String getLogin()
-    {
-        return login;
-    }
-
-    public void setLogin(String pLogin)
-    {
-        login = pLogin;
-    }
-
-    @Column(name = "SENHA")
-    public String getSenha()
-    {
-        return senha;
-    }
-
-    public void setSenha(String pSenha)
-    {
-        senha = pSenha;
-    }
-    
-    
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	@Column(name ="NIVEL")
+	public String getNivel() {
+		return nivel;
+	}
+	public void setNivel(String nivel) {
+		this.nivel = nivel;
+	}
+	
+	@Column(name ="DESCRICAO")
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	@Column(name ="AVALIACAO")
+	public long getAvaliacao() {
+		return avaliacao;
+	}
+	public void setAvaliacao(long avaliacao) {
+		this.avaliacao = avaliacao;
+	}
+	
 }

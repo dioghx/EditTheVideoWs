@@ -21,13 +21,10 @@ public class Empresa implements Serializable, Cloneable
     private int       id;
     private String    nome_curto;
     private String    razao_social;
-    private String    email;
     private long      cnpj;
-    private String    telefone;
-    private String    login;
-    private String    senha;
-    private Endereco  endereco;
+    private Usuario usuario;
 
+  //Determinar se necessita de anotação para sequência,ja que estaremos utilizando MySQL.
     @Id()
 	@SequenceGenerator(name ="PRO_SEQ", sequenceName = "PROFISSIONAL_SEQ", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PRO_SEQ")
@@ -42,18 +39,19 @@ public class Empresa implements Serializable, Cloneable
         id = pId;
     }
 
-    @Column(name = "NOME_CURTO")
+    @Column(name = "NOMECURTO")
     public String getNome_Curto()
     {
         return nome_curto;
     }
+    
 
     public void setNome_Curto(String pNome_Curto)
     {
         nome_curto = pNome_Curto;
     }
 
-    @Column(name = "RAZAO_SOCIAL")
+    @Column(name = "RAZAOSOCIAL")
     public String getRazao_Social()
     {
         return razao_social;
@@ -64,30 +62,18 @@ public class Empresa implements Serializable, Cloneable
         razao_social = pRazao_Social;
     }
 
-    @Column(name = "EMAIL")
-    public String getEmail()
-    {
-        return email;
-    }
 
-    public void setEmail(String pEmail)
-    {
-        email = pEmail;
-    }
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name="ID_USUARIO", referencedColumnName = "ID")
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
-    @Column(name = "TELEFONE")
-    public String getTelefone()
-    {
-        return telefone;
-    }
-
-    public void setTelefone(String pTelefone)
-    {
-        telefone = pTelefone;
-    }
-
-    @Column(name = "CNPJ")
+	@Column(name = "CNPJ")
     public long getCnpj()
     {
         return cnpj;
@@ -98,39 +84,7 @@ public class Empresa implements Serializable, Cloneable
         cnpj = pCnpj;
     }
 
-    @Column(name = "LOGIN")
-    public String getLogin()
-    {
-        return login;
-    }
-
-    public void setLogin(String pLogin)
-    {
-        login = pLogin;
-    }
-
-    @Column(name = "SENHA")
-    public String getSenha()
-    {
-        return senha;
-    }
-
-    public void setSenha(String pSenha)
-    {
-        senha = pSenha;
-    }
-    
-
-	@OneToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name="ID_ENDERECO", referencedColumnName = "ID")
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
+ 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

@@ -3,7 +3,7 @@
   <groupId>ProjetoStartUP3</groupId>
   <artifactId>ProjetoStartUP3</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+  
   <dependencies>
     <dependency>
       <groupId>javax.activation</groupId>
@@ -180,4 +180,5 @@
       </plugin>
     </plugins>
   </build>
+  <packaging>war</packaging>
 </project>

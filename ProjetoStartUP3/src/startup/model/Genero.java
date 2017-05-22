@@ -18,6 +18,7 @@ public class Genero {
 	
 	private int id;
 	private String nome;
+	
 	private List<Video>videos;
 	
 	@Id()
